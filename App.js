@@ -1,16 +1,25 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
- import AuthStack from './src/Navigation/AuthStack'
-import { LoginScreen, SignUpScreen } from './src/screens';
+import AuthStack from './src/Navigation/AuthStack'
+import { HomeScreen, LoginScreen, SignUpScreen } from './src/screens';
 import Routes from './src/Navigation/Routes';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import MainStack from './src/Navigation/MainStack';
+import {firestore} from './config'
 const App = () => {
   return (
-   <View>
-   {/* <LoginScreen/>
-   <SignUpScreen/> */}
+   <GestureHandlerRootView style={{flex:1}}>
+   <MainStack/>
+   {/* <LoginScreen/> */}
+   {/* <SignUpScreen/> */}
    {/* <AuthStack/> */}
-   <Routes/>
-   </View>
+   {/* <Routes/> */}
+
+   {/* <HomeScreen/> */}
+   
+   </GestureHandlerRootView>
+   
+   
   );
 };
 

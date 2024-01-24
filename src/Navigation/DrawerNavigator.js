@@ -1,11 +1,10 @@
-// Drawer.js
 
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Profile from '../screens/Profile';
 import AboutUsScreen from '../screens/AboutUsScreen';
 import AuthStack from './AuthStack';
-
+import 'react-native-gesture-handler';
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {

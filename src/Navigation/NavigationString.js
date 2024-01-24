@@ -3,4 +3,5 @@ export default{
     HOME_SCREEN:"HomeScreen",
     PROFILE:"ProfileScreen",
     SIGNUP_SCREEN:"SignUpScreen",
+    PlayGroundScreen:'PlayGroundScreen'
 } 
