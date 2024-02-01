@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen,PlayGroundScreen } from '../screens';
+import HomeScreen from '../screens/HomeScreen';
+import PlayGroundScreen from '../screens/PlayGroundScreen';
 
 const Stack = createNativeStackNavigator();
 export default function () {
@@ -11,7 +12,7 @@ export default function () {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{headerShown:true}}
+          options={{headerShown:false}}
         />
         <Stack.Screen
           name="PlayGroundScreen"

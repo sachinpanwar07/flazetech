@@ -1,51 +1,89 @@
-// screens/HomeScreen.js
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
+import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import data from '/flazetechQuiz/QuizApp/data.json'; // Adjust the path accordingly
+import Colors from '../styles/Colors';
+import {moderateScale, textScale} from '../styles/responsive';
 
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import { collection, getDocs } from 'firebase/firestore';
-import { firestore } from './config'; 
+const HomeScreen = () => {
+  const navigation = useNavigation();
 
-const HomeScreen = ({ navigation }) => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(firestore, 'categories'));
-        const categoriesData = [];
-        querySnapshot.forEach((doc) => {
-          categoriesData.push(doc.data());
-        });
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
+  const getUniqueCategories = () => {
+    const uniqueCategories = [];
+    data.forEach(item => {
+      if (!uniqueCategories.includes(item.category)) {
+        uniqueCategories.push(item.category);
       }
-    };
+    });
+    return uniqueCategories;
+  };
 
-    fetchCategories();
-  }, []);
+  const handleCategoryPress = category => {
+    // Navigate to another screen and pass necessary data
+    navigation.navigate('PlayGroundScreen', {category});
+  };
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Playground', { category: item.id })}
-      style={{ padding: 10, borderBottomWidth: 1, borderBottomColor: '#ccc' }}
-    >
-      <Text>{item.name}</Text>
-    </TouchableOpacity>
+  const renderItem = ({item}) => (
+    <View style={styles.categoryStyle}>
+      <TouchableOpacity
+        onPress={() => handleCategoryPress(item)}
+        style={styles.categoryList}>
+        <Text style={styles.categorytextStyle}>{item}</Text>
+        <Text style={styles.categorytextStyle}>{'>'}</Text>
+      </TouchableOpacity>
+    </View>
   );
 
+  const uniqueCategories = getUniqueCategories();
+
   return (
-    <View>
-      <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', padding: 20 }}>
-        Categories
+    <SafeAreaView>
+      <Text
+        style={{
+          fontSize: textScale(25),
+          padding: moderateScale(30),
+          fontWeight: 'bold',
+        }}>
+        flazetechQuiz
       </Text>
       <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id}
+        data={uniqueCategories}
         renderItem={renderItem}
+        keyExtractor={item => item}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  categoryStyle: {
+    flex: 1,
+  },
+  categoryList: {
+    backgroundColor: Colors.secondColor,
+    margin: moderateScale(12),
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    height: moderateScale(100),
+    borderRadius: moderateScale(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  categorytextStyle: {
+    padding: moderateScale(12),
+    fontSize: textScale(25),
+    color: 'white',
+    fontWeight: 'bold',
+
+    alignSelf: 'center',
+  },
+});

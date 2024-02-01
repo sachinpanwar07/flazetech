@@ -5,7 +5,7 @@ import CustomButton from './Components/CustomComponents/CustomButton';
 import {moderateScaleVertical, textScale} from '../styles/responsive';
 import Colors from '../styles/Colors';
 
-const LoginScreen = () => {
+const SignUpScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
@@ -30,7 +30,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
   Container: {
