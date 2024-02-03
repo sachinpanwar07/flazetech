@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import PlayGroundScreen from '../screens/PlayGroundScreen';
-
+import Result from '../screens/Result';
 const Stack = createNativeStackNavigator();
 export default function () {
   return (
@@ -17,6 +17,11 @@ export default function () {
         <Stack.Screen
           name="PlayGroundScreen"
           component={PlayGroundScreen}
+          options={{ headerShown:false}}
+        />
+           <Stack.Screen
+          name="Result"
+          component={Result}
           options={{ headerShown:false}}
         />
       </Stack.Navigator>
